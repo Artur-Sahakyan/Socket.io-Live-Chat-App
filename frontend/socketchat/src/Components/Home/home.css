@@ -1,0 +1,35 @@
+.home-container {
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -50px 0 0 -50px;
+}
+
+.text-input-field {
+  border: none;
+  background-color: rgb(183, 183, 183);
+  text-align: center;
+  width: 150px;
+  height: 35px;
+}
+
+.text-button-field {
+  border: none;
+  background-color: rgb(183, 183, 183);
+  margin-left: 10px;
+  cursor: pointer;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -30px,#D6D6E7 0 -3px 0 inset;
+  font-family: "JetBrains Mono",monospace;
+  height: 35px;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 18px;
+}
+
+.text-button-field:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
