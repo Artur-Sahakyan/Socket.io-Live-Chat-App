@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { socketContext } from 'store';
 
-import './home.css'
+import './home.css';
 
 function Home () {
   const [value, setValue] = useState('');
@@ -16,28 +16,28 @@ function Home () {
     };
   }, []);
 
-  function submit (e) {
+  function submit(e) {
     e.preventDefault();
     socket.emit('message', value);
     setAllMessages([...allMessages, value]);
-  };
+  }
 
   return (
     <div className='home-container'>
-       <input 
-          type = 'text'
-          placeholder='Enter Room Name'
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          className='text-input-field'
-       />
-       <button 
-          className="text-button-field"
-          onClick={submit}>send
-       </button>
-       { allMessages.map((msg, i) => <p key={i}> {[msg] } </p> )}
-     </div>
-  )
+      <input
+        type = 'text'
+        placeholder='Enter Room Name'
+        value={value}
+        onChange={e => setValue(e.target.value)}
+        className='text-input-field'
+      />
+      <button
+        className="text-button-field"
+        onClick={submit}>send
+      </button>
+      { allMessages.map((msg, i) => <p key={i}> {[msg] } </p>)}
+    </div>
+  );
 }
 
 export { Home };
