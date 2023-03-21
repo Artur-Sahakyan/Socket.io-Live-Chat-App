@@ -1,23 +1,20 @@
 import React, { createContext } from 'react';
-import { io } from 'socket.io-client'
+import { io } from 'socket.io-client';
 import { BASE_URL } from '../constants/services';
 
 const socket = io(BASE_URL, {
   withCredentials: true,
   extraHeaders: {
-    "my-custom-header": "abcd"
-  }
+    'my-custom-header': 'abcd',
+  },
 });
 
 const socketContext = createContext(socket);
 
-
-const SocketProvider = ({ children }) => {
-
-  return (
-    <socketContext.Provider value={{socket}}>
-      {children}
-    </socketContext.Provider> 
-  )
-};
+// eslint-disable-next-line react/prop-types
+const SocketProvider = ({ children }) =>
+  <socketContext.Provider value={{ socket }}>
+    {children}
+  </socketContext.Provider>
+  ;
 export { SocketProvider, socketContext };

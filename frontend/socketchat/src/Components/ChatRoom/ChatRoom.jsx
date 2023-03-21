@@ -1,11 +1,11 @@
-import *as React from 'react';
+import * as React from 'react';
 
-function ChatRoom () {
+function ChatRoom() {
   return (
     <div>
-       ChatRoom
-     </div>
-  )
+      ChatRoom
+    </div>
+  );
 }
 
 export default ChatRoom;

@@ -13,11 +13,10 @@ root.render(
     <SocketProvider>
       <BrowserRouter>
         <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/:roomId' element={<ChatRoom/>}/>
+          <Route path='/' element={<Home />} />
+          <Route path='/:roomId' element={<ChatRoom />} />
         </Routes>
       </BrowserRouter>
     </SocketProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
-
