@@ -9,7 +9,7 @@ function Home() {
 
   React.useEffect(() => {
     if (socket) {
-      socket.on('getMessage', message => {
+      socket.on('connect', message => {
         setAllMessages([...allMessages, message]);
       });
     }
@@ -23,8 +23,7 @@ function Home() {
 
   return (
     <div className='home-container'>
-      <input y
-
+      <input
         type = 'text'
         placeholder='Enter Room Name'
         value={value}

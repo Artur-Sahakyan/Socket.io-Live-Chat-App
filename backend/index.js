@@ -19,7 +19,7 @@ app.use(cors());
 
 io.on('connection', (socket) => {
   socket.on('message', (message) => {
-    socket.broadcast.emit('getMessage', message);
+    socket.broadcast.emit('connect', message);
   });
 });
 
