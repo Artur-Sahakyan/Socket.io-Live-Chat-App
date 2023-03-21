@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
-import { io } from 'socket.io-client';
-import { BASE_URL } from '../constants/services';
+import { io } from 'socket.io-client'
+import { BASE_URL } from 'constants';
 
 const socket = io(BASE_URL, {
   withCredentials: true,

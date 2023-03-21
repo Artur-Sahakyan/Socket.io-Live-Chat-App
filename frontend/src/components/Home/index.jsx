@@ -1,19 +1,20 @@
-import * as React from 'react';
-import { socketContext } from '../../socket';
+import { useState, useContext, useEffect } from 'react';
+import { socketContext } from 'store';
+
 import './home.css';
 
-function Home() {
-  const [value, setValue] = React.useState('');
-  const [allMessages, setAllMessages] = React.useState([]);
-  const { socket } = React.useContext(socketContext);
+function Home () {
+  const [value, setValue] = useState('');
+  const [allMessages, setAllMessages] = useState([]);
+  const { socket } = useContext(socketContext);
 
-  React.useEffect(() => {
-    if (socket) {
-      socket.on('connect', message => {
-        setAllMessages([...allMessages, message]);
-      });
-    }
-  }, [socket, allMessages]);
+  useEffect(() => {
+    if(socket) {
+        socket.on("getMessage", (message) => {
+          setAllMessages([...allMessages, message])
+        });
+    };
+  }, []);
 
   function submit(e) {
     e.preventDefault();
@@ -39,4 +40,4 @@ function Home() {
   );
 }
 
-export default Home;
+export { Home };
