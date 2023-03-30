@@ -5,13 +5,10 @@ import { PATHS } from 'constants';
 import { Fallback } from 'components/ui/'
 import { PrivateRoute } from './PrivateRoute';
 
-const ChatRoom = lazy(() => import('components/ChatRoom'));
-
 const ROUTES = [
     { path: PATHS.HOME, component: Home, isPrivate: true },
     { path: PATHS.LOG_IN, component: Login, isPrivate: false },
-    { path: PATHS.SIGN_UP, component: Signup, isPrivate: false },
-    { path: PATHS.CHAT_ROOM, component: ChatRoom, isPrivate: false },
+    { path: PATHS.SIGN_UP, component: Signup, isPrivate: false }
 ];
 
 const Views = () => {

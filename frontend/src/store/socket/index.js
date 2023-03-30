@@ -3,7 +3,7 @@ import { io } from 'socket.io-client'
 import { BASE_URL } from 'constants';
 
 const socket = io(BASE_URL, {
-  withCredentials: true,
+  reconnectionDelayMax: 10000,
   extraHeaders: {
     'my-custom-header': 'abcd',
   },
@@ -11,7 +11,6 @@ const socket = io(BASE_URL, {
 
 const socketContext = createContext(socket);
 
-// eslint-disable-next-line react/prop-types
 const SocketProvider = ({ children }) =>
   <socketContext.Provider value={{ socket }}>
     {children}
