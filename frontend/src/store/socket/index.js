@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect, useRef, useState } from 'react';
 import { io } from 'socket.io-client'
 import { BASE_URL } from 'constants';
 
@@ -11,9 +11,11 @@ const socket = io(BASE_URL, {
 
 const socketContext = createContext(socket);
 
-const SocketProvider = ({ children }) =>
-  <socketContext.Provider value={{ socket }}>
-    {children}
-  </socketContext.Provider>
-  ;
+const SocketProvider = ({ children }) => {
+  return (
+    <socketContext.Provider value={{ socket }}>
+      {children}
+    </socketContext.Provider> 
+  )
+};
 export { SocketProvider, socketContext };

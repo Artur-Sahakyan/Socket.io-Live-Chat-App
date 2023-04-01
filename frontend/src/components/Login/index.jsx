@@ -8,11 +8,11 @@ import { crateUserAction } from 'store/users/actions';
 import { BgCanvas } from './BgCanvas';
 
 import classes from './index.module.css';
+import { socketContext } from 'store';
 
 const Login = () => {
     const { dispatch } = useContext(UserContext);
     const [ isShowLinkToHome, setIsShowLinkToHome ] = useState(false);
-
     const valuesRef = useRef({
         code: '',
         name: '',
@@ -44,7 +44,7 @@ const Login = () => {
 
     return (
         <>
-            <BgCanvas />
+            {/* <BgCanvas /> */}
             <Modal>
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <div className={classes.wrapperInput}>

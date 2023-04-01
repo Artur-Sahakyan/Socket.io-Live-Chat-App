@@ -7,7 +7,7 @@ export const reducer = (state, action) => {
     case CREATE_USER: {
       sessionStorage.setItem('user', JSON.stringify(payload));
       return { ...state, user: payload }
-    } 
+    }
     default:
       return state;
   }

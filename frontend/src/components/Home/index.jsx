@@ -6,9 +6,11 @@ import { SocketProvider } from 'store';
 import { UserContext } from 'store';
 import { socketContext } from 'store';
 import { updateUsersAction } from 'store/onlineUsers/actions';
+import { OnlineUsers } from 'components/OnlineUsers';
 import Messages from '..//Messages';
 
 import './home.css';
+import { getBrieflyName } from 'utils/helper';
 
 function HomeComponent () {
   const [ value, setValue ] = useState('');
@@ -27,7 +29,7 @@ function HomeComponent () {
 
       fetch(GET_ONLINE_USERS_API)
         .then(res => res.json())
-        .then(usersss => dispatch(updateUsersAction(usersss)));
+        .then(users => dispatch(updateUsersAction(users, socket.id)));
 
       socket.emit('createUser', user);
 
@@ -35,11 +37,10 @@ function HomeComponent () {
         setAllMessages(messages);
       });
 
-      socket.on("createUser", (usersss) => {
-        dispatch(updateUsersAction(usersss));
+      socket.on("createUser", (users) => {
+        dispatch(updateUsersAction(users,  socket.id));
       });
     };
-
   }, []);
 
   function submit(e) {
@@ -51,25 +52,29 @@ function HomeComponent () {
 
   return (
     <div className='home-container'>
-      <div className='images'>
-          <img src={user.img}/>
-      </div>
       <Messages allMessages={allMessages}/>
-      <form className='form'>
-        <input
-          type='text'
-          placeholder='Enter Room Name'
-          value={value}
-          onChange={e => setValue(e.target.value)}
-          className='text-input-field'
-        />
-        <button
-          className="text-button-field"
-          onClick={submit}
-        >
-          send
-        </button>
-      </form>
+      <OnlineUsers />
+      <div className='wrapper-form'>
+        <div className='images'>
+          <img src={user.img}/>
+          <p>{getBrieflyName(user.name)}</p>
+        </div>
+        <form className='form'>
+          <input
+            type='text'
+            placeholder='Enter Room Name'
+            value={value}
+            onChange={e => setValue(e.target.value)}
+            className='text-input-field'
+          />
+          <button
+            className="text-button-field"
+            onClick={submit}
+          >
+            send
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
@@ -79,5 +84,6 @@ const Home = () => (
   <SocketProvider>
     <HomeComponent />
   </SocketProvider>
-)
+);
+
 export { Home };

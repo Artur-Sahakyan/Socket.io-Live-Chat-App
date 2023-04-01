@@ -5,7 +5,7 @@ export const reducer = (state, action) => {
 
   switch (type) {
     case UPDATE_USERS: 
-      return { ...state, users: payload.users }
+      return { ...state, users: payload.users.filter(user => user.id !== payload.socketId) }
     default:
       return state;
   }
