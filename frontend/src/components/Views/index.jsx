@@ -4,8 +4,6 @@ import { Home, Login, Signup} from 'components';
 import { PATHS } from 'constants';
 import { Fallback } from 'components/ui/'
 import { PrivateRoute } from './PrivateRoute';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const ROUTES = [
     { path: PATHS.HOME, component: Home, isPrivate: true },
@@ -13,30 +11,10 @@ const ROUTES = [
     { path: PATHS.SIGN_UP, component: Signup, isPrivate: false }
 ];
 
-const Ape = () => {
-    const [editorData, setEditorData] = useState('');
-
-    const handleEditorChange = (event, editor) => {
-      const data = editor.getData();
-      setEditorData(data);
-    }
-    return (
-        <div>
-            <h2>CKEditor 5 Example</h2>
-            <CKEditor
-                editor={ClassicEditor}
-                data={editorData}
-                onChange={handleEditorChange}
-            />
-            <p>{editorData}</p>
-        </div>
-    );
-};
-
 const Views = () => {
     return (
         <Routes>
-            <Route path='/ape' key={'/ape'} element={<Ape />}/>
+            <Route/>
             { ROUTES.map((el) => {
                 const { path, component: Component, isPrivate } = el;
                 return (
