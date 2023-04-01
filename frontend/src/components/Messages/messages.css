@@ -1,0 +1,14 @@
+.messages {
+    overflow-y: auto;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+}
+
+.messages p {
+    font-size: 18px;
+    font-family: cursive;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
