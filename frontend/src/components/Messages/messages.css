@@ -1,14 +1,44 @@
 .messages {
     overflow-y: auto;
-    gap: 15px;
+    gap: 5px;
     display: flex;
     flex-direction: column;
     max-width: 70%;
 }
 
-.messages p {
+.messages .msg-wrapper {
+    width: 70%;
+}
+
+.messages .msg-wrapper-right {
+    display: flex;
+    justify-content: flex-end;
+    margin-left: auto;
+
+}
+
+.messages .msg-wrapper p {
+    width: -webkit-fill-available;
     font-size: 18px;
     font-family: cursive;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    display: inline-block;
+    padding: 5px 0px;
+}
+
+.messages .msg-wrapper p span {
+    padding: 5px 10px;
+    border-radius: 10px;
+    background: antiquewhite;
+    width: auto;
+    display: block;
+}
+
+.messages .msg-wrapper-right p {
+    text-align: right;
+}
+
+.messages .msg-wrapper-right p span {
+    background: aliceblue;
 }

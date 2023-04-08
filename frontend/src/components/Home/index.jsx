@@ -1,25 +1,25 @@
 import { GET_MESSAGES_API } from 'constants';
 import { GET_ONLINE_USERS_API } from 'constants/services';
-import { useState, useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { OnlineUsersContext } from 'store';
 import { SocketProvider } from 'store';
 import { UserContext } from 'store';
 import { socketContext } from 'store';
 import { updateUsersAction } from 'store/onlineUsers/actions';
 import { OnlineUsers } from 'components/OnlineUsers';
+import { getBrieflyName } from 'utils/helper';
+import { AllMessagesContext } from 'store/allMessages';
+import { TypeMessageForm } from 'components/TypeMessageForm';
 import Messages from '..//Messages';
+import anonymousImg from 'assets/home/anonymous.jpg';
 
 import './home.css';
-import { getBrieflyName } from 'utils/helper';
 
 function HomeComponent () {
-  const [ value, setValue ] = useState('');
-  const [ allMessages, setAllMessages ] = useState([]);
   const { socket } = useContext(socketContext);
   const { user } = useContext(UserContext);
   const { dispatch, users } = useContext(OnlineUsersContext);
-
-  console.log('online users --> ', users);
+  const { setAllMessages } = useContext(AllMessagesContext);
 
   useEffect(() => {
     if(socket) {
@@ -43,37 +43,16 @@ function HomeComponent () {
     };
   }, []);
 
-  function submit(e) {
-    e.preventDefault();
-    socket.emit('message', value);
-    setAllMessages([...allMessages, value]);
-    setValue('');
-  };
-
   return (
     <div className='home-container'>
-      <Messages allMessages={allMessages}/>
+      <Messages />
       <OnlineUsers />
       <div className='wrapper-form'>
         <div className='images'>
-          <img src={user.img}/>
+          <img src={user.img || anonymousImg}/>
           <p>{getBrieflyName(user.name)}</p>
         </div>
-        <form className='form'>
-          <input
-            type='text'
-            placeholder='Enter Room Name'
-            value={value}
-            onChange={e => setValue(e.target.value)}
-            className='text-input-field'
-          />
-          <button
-            className="text-button-field"
-            onClick={submit}
-          >
-            send
-          </button>
-        </form>
+        <TypeMessageForm />
       </div>
     </div>
   );
