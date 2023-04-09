@@ -17,6 +17,7 @@ const io = socketIo(server, {
 });
 
 const DATA_PATH = path.resolve('./data.json');
+const ID_PATH = path.resolve('./id.txt');
 
 app.use(express.json());
 app.use(cors());
@@ -45,8 +46,14 @@ app.get('/onlineUsers', (req, res) => {
   });
 });
 
+app.get('/getId', (req, res) => {
+  fs.promises.readFile(ID_PATH, 'utf8').then((id) => {
+    res.send(id);
+    fs.promises.writeFile(ID_PATH, String(Number(id) + 1));
+  });
+});
+
 io.on('connection', (socket) => {
-  console.log('socket.id --> ', socket.id);
   socket.on('message', (message) => {
     fs.promises.readFile(DATA_PATH, 'utf8').then((dataStream) => {
       const data = JSON.parse(dataStream);
@@ -56,17 +63,23 @@ io.on('connection', (socket) => {
     });
   });
 
-  socket.on('createUser', ({name, img}) => {
+  socket.on('createUser', ({name, img, id}) => {
     fs.promises.readFile(DATA_PATH, 'utf8').then((dataStream) => {
       const data = JSON.parse(dataStream);
       data.users.push({
         name,
         img,
-        id:socket.id
+        id: socket.id,
+        isTyping: false,
+        userId: id
       });
       socket.broadcast.emit('createUser', data.users);
       writeToFile(data);
     });
+  });
+
+  socket.on('isTyping', ({ socketId, isTyping }) => {
+    socket.broadcast.emit('isTyping', { socketId, isTyping });
   });
 
   socket.on('disconnect', () => {

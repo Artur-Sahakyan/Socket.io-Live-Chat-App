@@ -5,10 +5,9 @@ import { useContext, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from 'store';
 import { crateUserAction } from 'store/users/actions';
-import { BgCanvas } from './BgCanvas';
+import { GET_ID } from 'constants/services';
 
 import classes from './index.module.css';
-import { socketContext } from 'store';
 
 const Login = () => {
     const { dispatch } = useContext(UserContext);
@@ -23,8 +22,13 @@ const Login = () => {
         event.preventDefault();
         if(SUPER_PHRASE === valuesRef.current.code.toLowerCase()) {
             const { name, img } = valuesRef.current;
-            dispatch(crateUserAction(name, img));
-            setIsShowLinkToHome(true);
+            fetch(GET_ID)
+                .then((res) => res.text())
+                .then((id) => {
+                    debugger
+                    dispatch(crateUserAction(name, img, id));
+                    setIsShowLinkToHome(true);
+                });
         };
     };
 
